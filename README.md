@@ -1,6 +1,46 @@
+# wimp_spectrum
 Result
 ![FIG](figures/WIMP_upperlimit.png)
 
+---
+
+## Repository structure
+
+```
+
+wimp_spectrum/
+├── WIMP_N_el_spectra/                output: elastic recoil spectrum files (generated)
+├── figures/                          output figures
+├── WIMP_xsec_LZ_excludedtupperlimit.txt   LZ upper limit on WIMP-nucleon cross-section
+├── scatter_kinematics.py             recoil energy kinematics (Er_max)
+├── scatter_target.py                 target nucleus properties (A, Z, number density)
+├── scatter_xsec.py                   differential cross-section dσ/dEr with Helm form factor
+├── DM_halo.py                        SHM velocity distribution, v_min, g(v_min)
+├── DM_modulation_model.py            annual modulation, Standard Halo model
+├── compute_el_spectrum.py            compute dN/dEr [ton⁻¹ yr⁻¹ keV⁻¹] and save to disk
+├── get_upperlimit_spectrum.py        load spectra, rescale to σ_f, load exclusion curves
+├── check_gvmin.py                    diagnostic checks on g(v_min)
+├── plot_wimp_spectrum.py             plotting routines
+└── plot_setup.py                     matplotlib style configuration
+```
+
+---
+
+## Related repositories
+
+This repository expects the following sibling directories:
+
+```
+~/projects/
+├── neutrino_spectrum/      ← https://github.com/YZHUANGwork/neutrino_spectrum 
+├── wimp_spectrum/          ← this repo
+└── detector_efficiency/    ← https://github.com/yourname/detector_efficiency
+```
+
+Detector efficiency files are read from `../detector_efficiency/` by default.
+Clone all three repositories into the same parent folder.
+
+---
 
 computing elastic WIMP–nucleus nuclear recoil spectra.
 
