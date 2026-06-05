@@ -29,22 +29,22 @@ def get_SHM_Ads(Ers, m_chi, m_T,
     xs = (np.sqrt(Ers) * (m_T + m_chi) / np.sqrt(m_T) / m_chi
           / (np.sqrt(2) * vc) * const.c).decompose()
 
-    Ads       = np.zeros(len(xs))
+    Ads       = np.full(len(xs), np.nan) #np.zeros(len(xs))
     xs_div_xp = xs / xp
     z         = vesc / vc
 
-    select_low = xs <= xp
-    select_mid = (xs > xp) & (xs <= z)
-    # xs > z: outside escape speed, Ad stays 0
+    select_reverse = xs <= xp#phase reverse
+    select_normal = (xs > xp) & (xs <= z)
+    # xs > z: cannot be approximate by sin or cos
 
-    if select_low.any():
-        Ads[select_low] = (0.034
-                           * (xs_div_xp[select_low] - 1)
-                           * (xs_div_xp[select_low] + 1))
+    if select_reverse.any():
+        Ads[select_reverse] = (0.034
+                           * (xs_div_xp[select_reverse] - 1)
+                           * (xs_div_xp[select_reverse] + 1))
 
-    if select_mid.any():
-        Ads[select_mid] = (0.014
-                           * (xs_div_xp[select_mid] - 1)
-                           * (xs_div_xp[select_mid] + 3.7))
+    if select_normal.any():
+        Ads[select_normal] = (0.014
+                           * (xs_div_xp[select_normal] - 1)
+                           * (xs_div_xp[select_normal] + 3.7))
 
     return Ads
